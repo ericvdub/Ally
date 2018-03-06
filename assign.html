@@ -1,0 +1,11 @@
+<script>
+var myAccounts = {};
+google.script.run.withSuccessHandler(returnAssigned).assign(filterSettings);
+
+
+function returnAssigned(accountInfo){
+  console.log("Account Info: ", accountInfo);
+  myAccounts[accountInfo[0]] = accountInfo;
+}
+</script>
+

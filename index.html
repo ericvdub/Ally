@@ -5,18 +5,9 @@
 <html>
   <head>
     <base target="_top">
-    <style>
-
-      .nothin {
-        margin: 0;
-        background: yellow;
-        position: absolute;
-        height: 300px;
-      }
-
-    </style>
-
-      
+    
+    <?!= getContent('designer') ?>
+    <?!= getContent('myAccounts') ?>
     
   </head>
   <body>
@@ -28,6 +19,7 @@
     <div id="content" style="display:none">
       <?!= getContent('content') ?>
     </div>
+    
     
   </body>
 </html>

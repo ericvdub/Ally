@@ -1,0 +1,16 @@
+<script>
+
+function myAccounts() {
+  console.log("Check designer: ", designer.name)
+  
+  // request all accounts in designer name in filter settings
+  google.script.run.withSuccessHandler(assignedAccounts).getMyAccounts(designer);
+}
+
+function assignedAccounts(list) {
+  console.log("List of My Accounts: ", list)
+
+}
+</script>
+
+

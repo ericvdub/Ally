@@ -1,0 +1,42 @@
+
+<script>
+
+function addDesigner(filterSettings) {
+  designer = new designer(filterSettings);
+  console.log("Added Designer");
+  console.log("Designer: ", designer.team);
+  
+  myAccounts();
+}
+
+function designer(filterSettings) {
+
+  this.name = filterSettings[0].toLowerCase();
+//  this.email = filterSettings[1].toLowerCase();
+  this.sfName = filterSettings[1].toLowerCase();
+  this.team = filterSettings[3];
+  this.includeOwnRegion = function() { if(filterSettings[4].toLowerCase() == "no") { return "" } else { return this.team } }; // If include region is no then return blank else return team
+  this.regions = [this.includeOwnRegion, filterSettings[5], filterSettings[6], filterSettings[7], filterSettings[8], filterSettings[9]];
+
+  // Acocunt types
+  this.gsr = filterSettings[10];
+  this.aurora = filterSettings[11];
+  this.snowProp = filterSettings[12];
+  this.part1 = filterSettings[13];
+  this.cprd = filterSettings[14];
+  this.otsGsr = filterSettings[16];
+  this.otsAurora = filterSettings[17];
+  
+  this.exclude = filterSettings[19].replace(/\s/g,'').split(",");
+  this.include = filterSettings[20].replace(/\s/g,'').split(",");
+  
+  this.debug_Designer = function() {
+      console.log("Name: ", name);
+  }
+  
+}
+
+
+</script>
+
+
