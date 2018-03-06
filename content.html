@@ -1,0 +1,84 @@
+<style>
+.row {
+  display: flex;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.tabs {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  max-width: 200px;
+}
+.tab {
+  margin: 3px;
+  padding: 10px;
+  border: 1px solid #959497;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+th {
+  border: 1px solid #959497;
+  padding: 10px;
+  background-color: #1dc5ad;
+}
+</style>
+
+<div style="margin:50px;">
+
+<div class="row">
+
+
+  <div class="column">
+    <nav>
+      <ul class="tabs">
+        <li class="tab">
+          <a href="#vrCalculator">ASSIGN</a>
+        </li>
+        <li class="tab">
+          <a href="#vrCalculator">UNASSIGN</a>
+        </li>
+        <li class="tab">
+          <a href="#vrCalculator">UPDATE NOTES</a>
+        </li>
+        <li class="tab">
+          <a href="#vrCalculator">MARK "ON HOLD"</a>
+        </li>
+        <li class="tab">
+          <a href="#vrCalculator">MARK "COMPLETE"</a>
+        </li>
+        <li class="tab">
+          <a href="#vrCalculator">MARK "CANCEL"</a>
+        </li>
+        
+      </ul>
+    </nav>
+    
+  </div>
+  
+  <div class="column">
+    <table>
+      <tr>
+        <th rowspan="2" colspan="4" id="serviceNumber">S-123456</th>
+        <th id="unitType">OTS GSR</th>
+        <th id="spNumber">SP-1231233</th>
+      </tr>
+      <tr>
+        <th id="contractType">PPA</th>
+        <th id="mercury">Mercury</th>
+      </tr>
+      <tr>
+        <th colspan="6" rowspan="4" id="notes">Notes</th>
+      </tr>
+      
+    </table>
+  </div>
+  
+</div>
+</div>
+
+
