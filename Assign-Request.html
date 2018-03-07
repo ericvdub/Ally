@@ -8,7 +8,7 @@ function assignRequest(evt) {
   // *** Check account is not assigned already
   // *** if so popup with request to complete, hold, cancel... "OK", "Nevermind"
   
-  google.script.run.withSuccessHandler(assignedReturn).assign(designer);
+  google.script.run.withSuccessHandler(assignedAccounts).assign(designer);
 }
 
 function assignedReturn(accountInfo){

@@ -6,7 +6,7 @@ function assign(designer) {
   
   // Get accounts in personal Queue
   var backlog = myQueue(designer.regions, designer.filterRegions, designer.settings);
-  return;
+  return JSON.stringify(backlog);
   
   Logger.log("Account: " + row);
   return JSON.stringify(row);
@@ -90,7 +90,7 @@ function myQueue(regions, filterRegions, settings) {
     
   });
   
-  Logger.log(backlog)
+  Logger.log("Backlog: " + backlog)
   return backlog;
   
 }
