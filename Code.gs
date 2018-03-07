@@ -13,19 +13,18 @@ function doGet(e) {
 
 
 function getFilterSettings(email){
-  
-  Logger.log('Filter Settings')
-  var ss = SpreadsheetApp.openById("1wMbpZ8Enm_ATgkv2JQ0Nu4GG0d6Juz6xeDwxktGmV_M").getSheetByName("Filter Settings");
+  Logger.log('Filter Settings');
+  var ss = SpreadsheetApp.openById("119oMBUEAWTQe7h6dhY-GQB0sSwpC1vRT6qUdlfisGPs").getSheetByName("Filter Settings");
   var lastRow = ss.getLastRow();
   var data = ss.getRange("B4:V"+lastRow).getValues();
-  Logger.log(data);
-  
+
   var row = filterData(data, email, 1);
   if(!row)
   {
-    console.log("Can't find your name in the Chrono \"Filter Settings\" tab. Make sure your name is spelled the exact same on both ends.");
+    Logger.log("Can't find your name in the Chrono \"Filter Settings\" tab. Make sure your name is spelled the exact same on both ends.");
     return false;
   }
+  Logger.log(row);
   return row; 
 }
 
@@ -35,9 +34,12 @@ function getFilterSettings(email){
 function filterData(data, check, column) {
   for(var i in data)
   {
-    if(data[i][column] == check)
+    if(data[i][column] == check) {
+      Logger.log(data[i]);
       return data[i];
+    }
   }
+  Logger.log("FALSE");
   return false;
 }
 
@@ -45,23 +47,18 @@ function filterData(data, check, column) {
 // finds all accounts in designers name
 //**********************************************************************************************************************************************************************
 function getMyAccounts(designer) {
-
-  var ss = SpreadsheetApp.openById("1wMbpZ8Enm_ATgkv2JQ0Nu4GG0d6Juz6xeDwxktGmV_M").getSheetByName("Report");
-  var data = ss.getRange("D2:W").getValues().filter(function(value) { return value[15].toLowerCase() == designer.name || value[15].toLowerCase() == designer.sfName });
+  Logger.log("Get My Accounts " + designer);
   
+  var ss = SpreadsheetApp.openById("119oMBUEAWTQe7h6dhY-GQB0sSwpC1vRT6qUdlfisGPs").getSheetByName("Report");
+  var data = ss.getRange("D2:W").getValues().filter(function(value) { return value[15].toLowerCase() == designer || value[15].toLowerCase() == designer });
+  Logger.log("In My Name: " + data);
+  
+  return JSON.stringify(data);
 }
 
-//**********************************************************************************************************************************************************************
-// finds all acocunts in designers name
-//**********************************************************************************************************************************************************************
-function findName(data, check, column) {
-  for(var i in data)
-  {
-    if(data[i][column] == check)
-      return data[i];
-  }
-  return false;
-}
+
+
+
 
 /**
  * Get the URL for the Google Apps Script running as a WebApp.
@@ -77,4 +74,13 @@ function getContent(filename) {
   return return1;
 }
 
+
+
+function test(){
+  try{
+    Logger.log(getMyAccounts("eric van wagoner"));
+  } catch(e) {
+    Logger.log("ERROR:", e);
+  }
+}
 

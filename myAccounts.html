@@ -1,15 +1,51 @@
+
 <script>
 
+
 function myAccounts() {
-  console.log("Check designer: ", designer.name)
+  console.log("Check designer:", designer.name)
   
   // request all accounts in designer name in filter settings
-  google.script.run.withSuccessHandler(assignedAccounts).getMyAccounts(designer);
+  google.script.run.withSuccessHandler(assignedAccounts).getMyAccounts("eric van wagoner");
 }
 
 function assignedAccounts(list) {
-  console.log("List of My Accounts: ", list)
 
+  list = JSON.parse(list);
+  console.log(list);
+  
+  
+  var list, header, table, old_tbody, tbody, tr, td, tn, row, col;
+  header = document.getElementById('header-my-accounts');
+  table = document.getElementById('myAccounts');
+  old_tbody = table.getElementsByTagName('tbody')[0];
+  console.log("Table:", old_tbody)
+  // clear the body of the table to clear old values
+  if(old_tbody != undefined)
+    table.removeChild(old_tbody);
+  
+  // if the accounts list is less than 1 then return
+  if(list.length < 1) {
+    header.innerHTML = "";
+    table.innerHTML = "No Accounts Are In Your Name";
+    return;
+  }
+  
+  // Add Header
+  header.innerHTML = "My Accounts";
+  // Create table with new data of accounts in designers name
+  tbody = document.createElement('tbody');
+  for (row = 0; row < list.length; row++){
+    tr = document.createElement('tr');
+    for (col = 0; col < list[row].length; col++){
+      td = document.createElement('td');
+      tn = document.createTextNode(list[row][col]);
+      td.appendChild(tn);
+      tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+  }
+  table.appendChild(tbody);
 }
 </script>
 

@@ -2,20 +2,21 @@
 <script>
 
 function addDesigner(filterSettings) {
+
   designer = new designer(filterSettings);
   console.log("Added Designer");
-  console.log("Designer: ", designer.team);
+  console.log("Designer Team: ", designer.team);
   
   myAccounts();
 }
 
-function designer(filterSettings) {
+var designer = function (filterSettings) {
 
-  this.name = filterSettings[0].toLowerCase();
+  this.name = filterSettings[0];
 //  this.email = filterSettings[1].toLowerCase();
-  this.sfName = filterSettings[1].toLowerCase();
+  this.sfName = filterSettings[1];
   this.team = filterSettings[3];
-  this.includeOwnRegion = function() { if(filterSettings[4].toLowerCase() == "no") { return "" } else { return this.team } }; // If include region is no then return blank else return team
+//  this.includeOwnRegion = function() { if(filterSettings[4].toLowerCase() == "no") { return "" } else { return this.team } }; // If include region is no then return blank else return team
   this.regions = [this.includeOwnRegion, filterSettings[5], filterSettings[6], filterSettings[7], filterSettings[8], filterSettings[9]];
 
   // Acocunt types
@@ -27,12 +28,12 @@ function designer(filterSettings) {
   this.otsGsr = filterSettings[16];
   this.otsAurora = filterSettings[17];
   
-  this.exclude = filterSettings[19].replace(/\s/g,'').split(",");
-  this.include = filterSettings[20].replace(/\s/g,'').split(",");
+  this.exclude = filterSettings[19]; // function () { if(filterSettings[19] != undefined) { return filterSettings[19].replace(/\s/g,'').split(",")} else{ return ""};
+  this.include = filterSettings[20]; // function () { if(filterSettings[20] != undefined) { return filterSettings[19].replace(/\s/g,'').split(",")} else{ return ""};
   
-  this.debug_Designer = function() {
-      console.log("Name: ", name);
-  }
+//  this.debug_Designer = function() {
+//      console.log("Name: ", name);
+//  }
   
 }
 
