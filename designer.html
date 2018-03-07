@@ -4,9 +4,9 @@
 function addDesigner(filterSettings) {
 
   designer = new designer(filterSettings);
-  console.log("Added Designer");
-  console.log("Designer Team: ", designer.team);
+  console.log("Designer: ", designer);
   
+  // get accounts in designers name
   myAccounts();
 }
 
@@ -16,24 +16,32 @@ var designer = function (filterSettings) {
 //  this.email = filterSettings[1].toLowerCase();
   this.sfName = filterSettings[1];
   this.team = filterSettings[3];
-//  this.includeOwnRegion = function() { if(filterSettings[4].toLowerCase() == "no") { return "" } else { return this.team } }; // If include region is no then return blank else return team
+  if(filterSettings[4].toLowerCase() == "no")
+    this.includeOwnRegion = "";
+  else
+    this.includeOwnRegion = this.team;
+    
   this.regions = [this.includeOwnRegion, filterSettings[5], filterSettings[6], filterSettings[7], filterSettings[8], filterSettings[9]];
 
   // Acocunt types
-  this.gsr = filterSettings[10];
-  this.aurora = filterSettings[11];
-  this.snowProp = filterSettings[12];
-  this.part1 = filterSettings[13];
-  this.cprd = filterSettings[14];
-  this.otsGsr = filterSettings[16];
-  this.otsAurora = filterSettings[17];
+  this.settings = {
+    'GSR': filterSettings[10],
+    'AURORA': filterSettings[11],
+    'SNOW PROP': filterSettings[12],
+    'PART 1': filterSettings[13],
+    'CP RD': filterSettings[14],
+    'OTS GSR': filterSettings[16],
+    'OTS AURORA': filterSettings[17]
+  };
   
-  this.exclude = filterSettings[19]; // function () { if(filterSettings[19] != undefined) { return filterSettings[19].replace(/\s/g,'').split(",")} else{ return ""};
-  this.include = filterSettings[20]; // function () { if(filterSettings[20] != undefined) { return filterSettings[19].replace(/\s/g,'').split(",")} else{ return ""};
-  
-//  this.debug_Designer = function() {
-//      console.log("Name: ", name);
-//  }
+  if(filterSettings[19] != "")  {
+    this.filterRegions = filterSettings[19].replace(/\s/g,'').split(",");
+    this.filterRegions.unshift(0);
+  }
+  else {
+    this.filterRegions = filterSettings[20].replace(/\s/g,'').split(",");
+    this.filterRegions.unshift(1);
+  }
   
 }
 

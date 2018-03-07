@@ -10,56 +10,6 @@ function doGet(e) {
 }
 
 
-
-
-function getFilterSettings(email){
-  Logger.log('Filter Settings');
-  var ss = SpreadsheetApp.openById("119oMBUEAWTQe7h6dhY-GQB0sSwpC1vRT6qUdlfisGPs").getSheetByName("Filter Settings");
-  var lastRow = ss.getLastRow();
-  var data = ss.getRange("B4:V"+lastRow).getValues();
-
-  var row = filterData(data, email, 1);
-  if(!row)
-  {
-    Logger.log("Can't find your name in the Chrono \"Filter Settings\" tab. Make sure your name is spelled the exact same on both ends.");
-    return false;
-  }
-  Logger.log(row);
-  return row; 
-}
-
-//**********************************************************************************************************************************************************************
-// finds row with matching emails
-//**********************************************************************************************************************************************************************
-function filterData(data, check, column) {
-  for(var i in data)
-  {
-    if(data[i][column] == check) {
-      Logger.log(data[i]);
-      return data[i];
-    }
-  }
-  Logger.log("FALSE");
-  return false;
-}
-
-//**********************************************************************************************************************************************************************
-// finds all accounts in designers name
-//**********************************************************************************************************************************************************************
-function getMyAccounts(designer) {
-  Logger.log("Get My Accounts " + designer);
-  
-  var ss = SpreadsheetApp.openById("119oMBUEAWTQe7h6dhY-GQB0sSwpC1vRT6qUdlfisGPs").getSheetByName("Report");
-  var data = ss.getRange("D2:W").getValues().filter(function(value) { return value[15].toLowerCase() == designer || value[15].toLowerCase() == designer });
-  Logger.log("In My Name: " + data);
-  
-  return JSON.stringify(data);
-}
-
-
-
-
-
 /**
  * Get the URL for the Google Apps Script running as a WebApp.
  */
@@ -75,12 +25,41 @@ function getContent(filename) {
 }
 
 
-
 function test(){
+  
+  var para = {
+    'name': "Eric Van Wagoner", 
+    'sfName': "eric.vanwagoner@vivintsolar.com", 
+    'team': "Southwest", 
+    'includeOwnRegion': "Southwest", 
+    'regions': ["", "Southwest"],
+    'settings': {
+      'GSR': 1,
+      'AURORA': 1,
+      'SNOW PROP': 1,
+      'PART 1': 1,
+      'CP RD': 1,
+      'OTS GSR': 1,
+      'OTS AURORA': 1
+    },
+    'filterRegions': [0,""]
+  }
   try{
-    Logger.log(getMyAccounts("eric van wagoner"));
+    Logger.log(assign(para));
   } catch(e) {
     Logger.log("ERROR:", e);
   }
 }
 
+
+// Create chrono Id's array
+var chronoIds = [
+  ["Grit Movement", "1wMbpZ8Enm_ATgkv2JQ0Nu4GG0d6Juz6xeDwxktGmV_M"],
+  ["New England", "1Rxl9n_kxBZxghPJgHO8P5k1qiKFR48cNJH6ucZujzj8"],
+  ["Legion", "16kDxFpm3QcEGEr_8OSyVRvlBzpZXsoycaQZtXSaC5sM"],
+  ["NorCal", "1pK5wwlXkEM9BkDl_0sRKMU6kEed8ivdyL9sg3UPABns"],
+  ["SoCal", "1AAc1IXIi4jIEwkFOIEeHGjO_XlXbpj3k6Jv9ZY7RQbw"],
+  ["Southwest", "119oMBUEAWTQe7h6dhY-GQB0sSwpC1vRT6qUdlfisGPs"], // "1uwIrt34qsNnXqX0Mxh941vOh7_le3kzoHylS7KXq_w8"],
+  ["NIS", "1ITtsDxcp8hnYVTlBk2YpzfoDMd-mqbO_U9gXqh6BMuQ"],
+  ["Dealer", "1SnsymujZI0dTpBkI67vS6BDxNjiNE4JKG4Y2ApDJqgM"],
+]

@@ -1,0 +1,19 @@
+<script>
+
+function assignRequest(evt) {
+  // Prevent the default action of the calling event.
+  //Google seems to have a problem with the anchor tag default action.
+  evt.preventDefault();
+    
+  // *** Check account is not assigned already
+  // *** if so popup with request to complete, hold, cancel... "OK", "Nevermind"
+  
+  google.script.run.withSuccessHandler(assignedReturn).assign(designer);
+}
+
+function assignedReturn(accountInfo){
+  console.log("Account Info: ", accountInfo);
+//  myAccounts[accountInfo[0]] = accountInfo;
+}
+</script>
+

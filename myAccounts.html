@@ -6,7 +6,7 @@ function myAccounts() {
   console.log("Check designer:", designer.name)
   
   // request all accounts in designer name in filter settings
-  google.script.run.withSuccessHandler(assignedAccounts).getMyAccounts("eric van wagoner");
+  google.script.run.withSuccessHandler(assignedAccounts).getMyAccounts(designer);
 }
 
 function assignedAccounts(list) {
@@ -19,7 +19,6 @@ function assignedAccounts(list) {
   header = document.getElementById('header-my-accounts');
   table = document.getElementById('myAccounts');
   old_tbody = table.getElementsByTagName('tbody')[0];
-  console.log("Table:", old_tbody)
   // clear the body of the table to clear old values
   if(old_tbody != undefined)
     table.removeChild(old_tbody);
