@@ -45,7 +45,7 @@ function test(){
     'filterRegions': [0,""]
   }
   try{
-    Logger.log(assign(para));
+    Logger.log(getMyAccounts(para));
   } catch(e) {
     Logger.log("ERROR:", e);
   }

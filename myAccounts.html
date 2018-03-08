@@ -3,7 +3,7 @@
 
 
 function myAccounts() {
-  console.log("Check designer:", designer.name)
+//  console.log("Check designer:", designer.name)
   
   // request all accounts in designer name in filter settings
   google.script.run.withSuccessHandler(assignedAccounts).getMyAccounts(designer);
@@ -12,19 +12,20 @@ function myAccounts() {
 function assignedAccounts(list) {
 
   list = JSON.parse(list);
-  console.log(list);
+//  console.log(list);
   
   
   var list, header, table, old_tbody, tbody, tr, td, tn, row, col;
   header = document.getElementById('header-my-accounts');
   table = document.getElementById('myAccounts');
+  table.innerHTML = "";
   old_tbody = table.getElementsByTagName('tbody')[0];
   // clear the body of the table to clear old values
   if(old_tbody != undefined)
     table.removeChild(old_tbody);
   
   // if the accounts list is less than 1 then return
-  if(list.length < 1) {
+  if(list.length < 1 || list === false) {
     header.innerHTML = "";
     table.innerHTML = "No Accounts Are In Your Name";
     return;

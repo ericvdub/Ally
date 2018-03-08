@@ -8,12 +8,25 @@ function assignRequest(evt) {
   // *** Check account is not assigned already
   // *** if so popup with request to complete, hold, cancel... "OK", "Nevermind"
   
-  google.script.run.withSuccessHandler(assignedAccounts).assign(designer);
+  google.script.run.withSuccessHandler(assignedReturn).getAssignment(designer);
 }
 
 function assignedReturn(accountInfo){
+  if(accountInfo == -1)
+    alert('The Chrono Report is currently being updated, try again in a minute!')
+  accountInfo = JSON.parse(accountInfo);
   console.log("Account Info: ", accountInfo);
-//  myAccounts[accountInfo[0]] = accountInfo;
+  
+  console.log("AFirst: ", accountInfo[1]);
+  document.getElementById('serviceNumber').innerHTML = accountInfo[1];
+  document.getElementById('unitType').innerHTML = accountInfo[8];
+  document.getElementById('spNumber').innerHTML = accountInfo[2];
+  document.getElementById('contractType').innerHTML = accountInfo[6];
+  document.getElementById('mercury').innerHTML = "Change";
+  document.getElementById('notes').innerHTML = accountInfo[12];
+  
+  // get accounts in designers name
+  myAccounts();
 }
 </script>
 
