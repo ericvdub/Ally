@@ -1,0 +1,90 @@
+
+<style>
+body{
+  margin-right: 50px;
+  margin-left: 50px;
+}
+a {
+  color: #656569;
+  text-decoration: none;
+}
+h2 {
+  text-decoration: underline;
+}
+
+#waiting {
+  border: 10px solid #d6d4d4;
+  border-radius: 50%;
+  border-top: 10px solid #3498db;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  padding-right: 50px;
+  font-weight: bold;
+  font-size: 15px;
+}
+.view {
+  background-color:  #999999;
+}
+.current-view {
+  display: flex;
+  width: 800px;
+  
+}
+.view-label {
+  width: 25%;
+}
+.top-section {
+  width: 25%;
+  height: 50px;
+  border: 2px solid black;
+  padding: 10px;
+  background-color:  #FFA445;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 25px; 
+}
+.notes-section {
+  width: 50%;
+  min-height: 50px;
+  border: 2px solid black;
+  padding: 10px;
+  background-color:  #FFA445;
+}
+
+
+table {
+  font-weight: bold;
+  border-bottom: 1px solid black;
+}
+thead td  {
+  background-color: #999999;
+  border: 2px solid black;
+  padding: 10px;
+}
+tbody tr:hover td {
+  background-color: #FFA445;
+  /* border: 2px solid black; */
+}
+td  {
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  padding: 10px;
+}
+
+</style>
+
+

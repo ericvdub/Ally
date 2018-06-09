@@ -1,0 +1,54 @@
+<script>
+//**********************************************************************************************************************************************************************
+// On-click response function when acocunts in designer name table are clicked
+// get row data and update Main Account View
+//**********************************************************************************************************************************************************************
+function selectRow(element) {
+  console.log("Function selectRow");
+  console.log("Element", element);
+  var serviceNumber, unitType, spNumber, contractType, mercuryLink, notes;
+  
+  // Color selected row
+  resetTableBackgroundColor();
+  element.style.backgroundColor = "#FFA445";
+  
+  // get all the td (columns) in tr (row) and set the Account info
+  var children = element.children; 
+  
+  var accountInfo = {
+    'serviceNumber': children[1].textContent,
+    'spNumber': children[2].textContent, 
+    'unitType': children[8].textContent,
+    'contractType': children[6].textContent,
+    'mercury': "<a href='https://mercury.vivintsolar.com/#!/account/"+children[1].textContent.replace("S-","")+"/schedule' target='_blank'>Mercury</a>",
+    'notes': children[12].textContent
+  };
+  
+
+  // Send selected row to Main Account View
+  updateView(accountInfo)
+  
+  return;
+}
+
+//**********************************************************************************************************************************************************************
+// get the time deifference from now and date in hours : minutes
+//**********************************************************************************************************************************************************************
+function getDueIn (dueDate) {
+  dueDate = new Date(dueDate)
+  var now = Date.now();
+  var minus = dueDate < now;
+  var dueIn = Math.abs(dueDate - now);
+  console.log(dueIn);
+  var diffHrs = Math.floor((dueIn % 86400000) / 3600000); // hours
+  var diffMins = Math.round(((dueIn % 86400000) % 3600000) / 60000); // minutes
+  diffHrs = ("0" + diffHrs).slice(-2);
+  diffMins = ("0" + diffMins).slice(-2);
+  var str = diffHrs + ":" + diffMins;
+  if(minus)
+    str = "-" + str
+  return str;
+}
+</script>
+
+

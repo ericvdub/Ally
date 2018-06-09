@@ -1,0 +1,104 @@
+
+<script>
+
+
+function myAccountsRequest() {
+  console.log("Check designer:", designer.name)
+  
+  // request all accounts in designer name in filter settings
+  google.script.run.withSuccessHandler(assignedAccounts).withFailureHandler(findAssignedFail).getMyAccounts(designer);
+}
+
+function assignedAccounts(list) {
+  console.log("Function assignedAccounts");
+  list = JSON.parse(list);
+  console.log(list);
+  
+  
+  var list, title, table, old_thead, old_tbody, thead, tbody, tr, td, tn, row, col;
+  title = document.getElementById('title-my-accounts');
+  table = document.getElementById('table-my-accounts');
+  table.innerHTML = "";
+  old_thead = table.getElementsByTagName('thead')[0];
+  old_tbody = table.getElementsByTagName('tbody')[0];
+  // clear the body of the table to clear old values
+  if(old_tbody != undefined) {
+    table.removeChild(old_thead);
+    table.removeChild(old_tbody);
+  }
+  
+  // if the accounts list is less than 1 then return
+  if(list.length < 1 || list === false) {
+    title.innerHTML = "";
+    table.innerHTML = "No Accounts Are In Your Name";
+  }
+  else {
+    title.innerHTML = "My Accounts";
+    thead = document.createElement('thead');
+    table.appendChild(thead);
+    // Create table with new data of accounts in designers name
+    tbody = document.createElement('tbody');
+    for (row = 0; row < list.length; row++){
+      tr = document.createElement('tr');
+      for (col = 0; col < list[row].length; col++){
+        td = document.createElement('td');
+        tn = document.createTextNode(list[row][col]);
+        td.appendChild(tn);
+        tr.appendChild(td);
+      }
+      if(row === 0)
+        thead.appendChild(tr);
+      else {
+        tbody.appendChild(tr);
+        // If the first column add On-Click event to select row
+        tr.addEventListener('click', function(event){ selectRow(event.target.parentElement); });
+      }
+    }
+    table.appendChild(tbody);
+  }
+
+  resetTableBackgroundColor();
+  //Hide the Backlog Due Date, Contract Type, Utility Company, and Unit Type columns
+  $('td:nth-child(4)').hide();
+  $('td:nth-child(5)').hide();
+  $('td:nth-child(7)').hide();
+  $('td:nth-child(8)').hide();
+  $('td:nth-child(9)').hide();
+  $('td:nth-child(10)').hide();
+  
+  if(designer.master) {
+    $('td:nth-child(1)').hide();
+    $('td:nth-child(10)').show();
+    $('td:nth-child(11)').hide();
+  }
+  
+  var serviceNumber = $('#serviceNumber').text();
+  console.log("Service Num:", serviceNumber);
+  // if account selected highlight
+  if(serviceNumber != "" && serviceNumber != null) {
+    // Highlight selected row
+    var tableRow = $("tbody td").filter(function() {
+        return $(this).text() == serviceNumber;
+    }).closest("tr");
+    selectRow(tableRow[0]);
+    
+  }
+  
+  $("#waiting").hide();
+}
+
+function resetTableBackgroundColor() {
+  $("tbody tr:even").css("background-color", "#DBD9D9");
+  $("tbody tr:odd").css("background-color", "#959497");
+}
+
+
+function findAssignedFail(e){
+  console.log(e);
+  $("#waiting").hide();
+  document.getElementById('table-my-accounts').innerHTML = "Error Finding Accounts";
+}
+
+</script>
+
+

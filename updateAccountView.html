@@ -1,0 +1,16 @@
+<script>
+//**********************************************************************************************************************************************************************
+// Update Main Account View
+//**********************************************************************************************************************************************************************
+function updateView(accountInfo) {
+
+  document.getElementById('serviceNumber').innerHTML = accountInfo.serviceNumber;
+  document.getElementById('spNumber').innerHTML = accountInfo.spNumber;
+  document.getElementById('unitType').innerHTML = accountInfo.unitType;
+  document.getElementById('contractType').innerHTML = accountInfo.contractType;
+  document.getElementById('mercury').innerHTML = accountInfo.mercury;
+  document.getElementById('notes').innerHTML = accountInfo.notes;
+  
+  return;
+}
+</script>

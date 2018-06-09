@@ -1,0 +1,67 @@
+
+<script>
+
+function addDesigner(filterSettings) {
+  console.log("Designer:", filterSettings);
+  if(filterSettings === false) {
+    alert("Can't find Email in Filter Settings.");
+    return;
+  } 
+  
+  //Create new designer object
+  designer = filterSettings;
+  
+  // Add filter settings to nav bar
+  document.getElementById('designer_logged_in').innerHTML = designer.name;
+  
+  
+  
+  
+  // create elements <table> and a <tbody>
+//  var tbl     = document.createElement("table");
+//  var tblBody = document.createElement("tbody");
+//  var row = document.createElement("tr");
+//  var cell = document.createElement("td"); 
+//  
+//  tr.appendChild(td);
+  
+  
+//  var offices = designer.settings;
+//  var output = '';
+//  var size = Object.keys(offices).length;
+//  var index = 0;
+//  for (var property in offices) {
+//    output += property + ': ' + offices[property]+' ';
+//    index++;
+//  }
+  
+//  var regions = designer.regions.filter(function(value) { return value !== ""}).toString();
+//  document.getElementById("filter_settings-regions").textContent += regions;
+////  document.getElementById("filter_settings-unitTypes").textContent += output;
+//  if(designer.filterRegions.include)
+//    var includeExclude = "Include";
+//  else
+//    var includeExclude = "Exclude";
+//  var offices = designer.filterRegions.offices
+//  document.getElementById("include-exclude").innerHTML = includeExclude;
+//  document.getElementById("filter_settings-offices").textContent += offices;
+  
+  
+  // Show buttons to applicable designer
+  var team = designer.team;
+  if(team.toLowerCase() != "outsource") {
+    // Dispaly loading circle
+    $(".cpDesigner").show();
+  }
+  else {
+    // Dispaly loading circle
+    $(".otDesigner").show();
+  }
+  // get accounts in designers name
+//  myAccountsRequest();
+}
+
+
+</script>
+
+

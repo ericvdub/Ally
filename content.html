@@ -1,0 +1,160 @@
+<style>
+/* Navigation Styling */
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+.tab {
+  display: flex;
+  text-align: center;
+}
+.btnlink {
+  text-decoration:none!important;
+  padding: 15px;
+  border: 2px solid black;
+  font-weight: bold;
+  width: 100%;
+}
+
+.active,
+.btnlink:hover {
+  background-color: #FFA445;
+}
+.active_account {
+  font-weight:bold;
+  border: 2px solid black;
+  background-color: #FFA445;
+  padding: 10px;
+  width: 100px;
+  height: 20px;
+}
+</style>
+
+<div>
+
+<div class="row">
+
+  <div class="column">
+    <nav class="cpDesigner" style="display: none;">
+      <ul class="tabs">
+        <li class="tab">
+          <a href="#content" class="btnlink" onclick="assignRequest(event)">ASSIGN</a>
+        </li>
+        <li class="tab">
+          <a href="#" id="Unassign" class="btnlink" onclick="updateAccountStatus(event)">UNASSIGN</a>
+        </li>
+        <li class="tab">
+          <a href="#" id="On Hold" class="btnlink" onclick="updateAccountStatus(event)">ON HOLD</a>
+        </li>
+        <li class="tab">
+          <a href="#" id="Cancel" class="btnlink" onclick="updateAccountStatus(event)">CANCEL</a>
+        </li>
+        <li class="tab">
+          <a href="#" id="Completed" class="btnlink" onclick="updateAccountStatus(event)">COMPLETE</a>
+        </li>
+        
+      </ul>
+    </nav>
+    
+    <nav class="otDesigner" style="display: none;">
+      <ul class="tabs">
+        <li class="tab">
+          <a href="#content" class="btnlink" onclick="assignRequest(event)">ASSIGN</a>
+        </li>
+        <li class="tab">
+          <a href="#" id="Reject" class="btnlink" onclick="updateAccountStatus(event)">REJECT</a>
+        </li>
+        <li class="tab">
+          <a href="#" id="IN QC" class="btnlink" onclick="updateAccountStatus(event)" style="display: none;">IN QC</a>
+        </li>
+        <li class="tab">
+          <a href="#" id="Completed" class="btnlink" onclick="updateAccountStatus(event)">COMPLETE</a>
+        </li>
+        
+      </ul>
+    </nav>
+    
+  </div>
+  
+  
+  
+  
+  <div class="column">
+    <h2>Current Account</h2>
+    <div class="row current-view">
+      <div class="view-label">
+        <label>Service #:</label>
+      </div>
+      <div class="view-label">
+        <label>Solar Project #:</label>
+      </div>
+      <div class="view-label">
+        <label>Unit Type:</label>
+      </div>
+      <div class="view-label">
+        <label>Contract:</label>
+      </div>
+      <div class="view-label">
+        <label>Mercury:</label>
+      </div>
+    </div>
+    
+    <div class="row current-view">
+      <div id="serviceNumber" class="top-section"></div>
+      <div id="spNumber" class="top-section"></div>
+      <div id="unitType" class="top-section"></div>
+      <div id="contractType" class="top-section"></div>
+      <div id="mercury" class="top-section"></div>
+    </div>
+    
+    <div class="row current-view">
+      <div class="view-label">
+        <label>Notes:</label>
+      </div>
+    </div>
+    
+    <div class="row current-view">
+      <div id="notes" class="notes-section" contenteditable="true"></div>
+      <script>
+        // add event listen on change to notes cell 
+//        document.getElementById('notes').addEventListener('input', function(event) {
+//          updateAccountStatus(event);
+//        });
+        $('#notes').blur(function(event){
+           updateAccountStatus(event);
+        });
+      </script>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+<!--
+  <div class="column" style="display: none;">
+    <table>
+      <tr>
+        <td class="active_account" rowspan="2" colspan="4" id="serviceNumber">Service #</td>
+        <td class="active_account" id="unitType">Unit Type</td>
+        <td class="active_account" id="spNumber">SP #</td>
+      </tr>
+      <tr>
+        <td class="active_account" id="contractType">Contract</td>
+        <td class="active_account" id="mercury">Mercury</td>
+      </tr>
+      <tr>
+        <td class="active_account" colspan="6" rowspan="4" id="notes" contenteditable="true" >NOTES</td>
+      </tr>
+      <script>
+        // add event listen on change to notes cell 
+        document.getElementById('notes').addEventListener('input', function(event) {
+          updateAccountStatus(event);
+        });
+      </script>
+      
+    </table>
+  </div>
+  
+  -->

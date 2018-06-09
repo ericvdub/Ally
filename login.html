@@ -1,0 +1,74 @@
+<style>
+   .center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 300px;
+    }
+</style>
+    
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-scope" content="https://www.googleapis.com/auth/plus.login" />
+<meta name="google-signin-client_id" content="737396383801-62om9lr8s11gcb2knkc26k2olimqh4ia.apps.googleusercontent.com">
+<script>
+    
+    function onSignIn(googleUser) {
+      // Useful data for your client-side scripts:
+      try {
+        var profile = googleUser.getBasicProfile();
+      } catch(e) {
+        console.log("Error Found: " + e);
+      }
+      console.log("Email: " + profile.getEmail());
+          
+      if(googleUser.getHostedDomain() != "vivintsolar.com") {
+        alert("Please Loggin with a vivintsolar.com account");
+        signOut();
+        return;
+      }
+    
+      // Hide login DIV
+      var login = document.getElementById("login");
+      if (login.style.display === "none") {
+        login.style.display = "block";
+      } else {
+        login.style.display = "none";
+      }
+//      // Show Content DIV after successful login
+      var content = document.getElementById("content");
+      if (content.style.display === "none") {
+        content.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+      
+      // request filter settings
+      window.userEmail = profile.getEmail();
+      // request filter settings
+      google.script.run.withSuccessHandler(function(designer) {
+        addDesigner(designer);
+        myAccountsRequest();
+      }).getFilterSettings(userEmail);
+      
+      
+      
+    }
+    
+    function signOut() {    
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut();
+      console.log('User signed out.');
+    }
+      
+    function onSignInFailure() {
+      console.log('Failed to Sign In.');
+    }
+</script>  
+    
+  <div class="center">
+    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div> 
+    
+  </div>
+
+

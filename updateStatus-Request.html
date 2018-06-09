@@ -1,0 +1,95 @@
+<script>
+//**********************************************************************************************************************************************************************
+// Update status
+//**********************************************************************************************************************************************************************
+function updateAccountStatus(event) {
+  event.preventDefault();
+  console.log("Event:", event);
+  console.log("Target:", event.target.id);
+  
+  
+  var serviceNumber = $('#serviceNumber').html();
+  console.log("Service Number:", serviceNumber);
+  if(serviceNumber.indexOf("S-") === -1) {
+    alert("No account has been selected. Please select an account by its region column.");
+    return;
+  }
+  var notes = $('#notes').text(); // document.getElementById('notes').innerHMTL;
+  console.log("Notes:", notes);
+  if(notes === "") {
+    //alert("No Notes.");
+  }
+  // Get the account info from table matching the Service Number in the Main View
+  var customerId = $('td').filter(function(){
+    return $(this).text() === serviceNumber;
+  })
+//  console.log("customerId:",customerId.parents('tr'));
+  var children = customerId.parents('tr')[0].children;
+//  console.log("Chrono:",children[0].textContent);
+  
+  
+  var accountInfo = {
+    'region': children[0].textContent,
+    'serviceNumber': serviceNumber,
+    'designer': designer.name,
+    'status': event.target.id,
+    'unitType': children[8].textContent,
+    'notes': notes
+  };
+    
+  
+  console.log("Account Info:", accountInfo);
+  
+  // Dispaly loading circle
+  $("#waiting").show();
+  // request all accounts in designer name in filter settings
+  google.script.run.withSuccessHandler(attempt).statusUpdate(accountInfo);
+  
+  return;
+}
+
+//**********************************************************************************************************************************************************************
+// Handle returned status of successfulness of updating the chrono with status
+//**********************************************************************************************************************************************************************
+function attempt(success) {
+  console.log("Status Update Success:", success);
+  
+  // If the servince number is not found in the chrono
+  if(!success.value) {
+    alert('The account is no longer in the Chrono');
+    var accountInfo = {
+      serviceNumber: "",
+      spNumber: "",
+      unitType: "",
+      contractType: "",
+      mercury: "",
+      notes: ""
+    }
+    updateView(accountInfo);
+  }
+    
+  if(success.type === "Unassign" || success.type === "Reject") {
+    // Clear Main Account View
+    var accountInfo = {
+      serviceNumber: "",
+      spNumber: "",
+      unitType: "",
+      contractType: "",
+      mercury: "",
+      notes: ""
+    }
+    updateView(accountInfo);
+  }
+  
+  if(success.running) {
+    // Clear Main Account View
+    alert("The Chrono report is currently running and will update the status of your account when done. It may not reflect your changes in \"My Accounts\" until finished.");
+  }
+  
+  // get accounts in designers name
+  myAccountsRequest();
+//  $("#waiting").hide();
+  
+  return;
+}
+</script>
